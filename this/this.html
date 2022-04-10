@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>this</title>
+</head>
+<body>
+  <div></div>
+</body>
+</html>
+
+<script>
+  // this 1. 
+  // 그냥 사용하거나 일반 함수 안에서 사용하면 window 를 의미!
+  // 사실상 전역공간에서 만들면 this 가 있는 함수를 포함하는 object 가 window 인 것이므로 2번과 동일하다고 봐도 무방
+
+  // this 2. 
+  // object 내 함수 안에서 this 를 사용하면, this 가 있는 함수를 포함하는 object 를 의미!
+
+
+
+
+
+  // JavaScript 를 엄격하게 사용 가능할 때 'use strict' 사용!
+  // 'use strict';
+
+
+  // ex1.
+  console.log(this);  // this 는 window.
+
+
+  // ex2.
+  function func2(){
+    console.log(this);   
+  }
+
+  func2();  // this 는 기본적으로 window, strict mode 에서는 undefined.
+
+
+  // ex3.
+  let obj3 = {
+    data3 : "Seoyun",
+    func3 : function(){
+      console.log(this)
+    }
+  }
+
+  obj3.func3(); // this 가 있는 func3() 함수를 포함하고 있는 object, 즉 여기서는 obj3 을 의미.
+
+
+  // ex4.
+  let obj4 = {
+    data4 : {
+      func4 : function(){
+        console.log(this);
+      }
+    }
+  }
+
+  obj4.data4.func4(); // this 가 있는 func4() 함수를 포함하고 있는 object, 즉 여기서는 data4 를 의미.
+
+
+  // ex5.
+  let obj5 = {
+    data5 : {
+      func5_1 : ()=>{
+        console.log(this);
+      },
+      func5_2 : function(){
+        console.log(this);
+      },
+      func5_3(){
+        console.log(this);
+      }
+    }
+  }
+
+  obj5.data5.func5_1(); // arrow function 은 this 값을 함수 바깥에서 그대로 가져오므로, window 를 의미.
+  obj5.data5.func5_2(); // this 가 있는 func5_2() 함수를 포함하고 있는 object, 즉 여기서는 data5 를 의미.
+  obj5.data5.func5_3(); // func5_2() 함수는 func5_3() 함수처럼 사용 가능.
+
+
+  // ex6.
+  // 함수나 변수를 전역공간에서 만들면 { window } 에 보관.
+  function func6(){
+    console.log(this);
+  }
+
+  func6();  // this 는 기본적으로 window, strict mode 에서는 undefined.
+  window.func6();  // this 는 window.
+</script>
