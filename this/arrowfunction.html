@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrow Function</title>
+</head>
+<body>
+  <button id="btn">버튼</button>
+</body>
+</html>
+
+<script>
+  // 함수를 만드는 이유
+  // 1. 코드들을 기능으로 묶고 싶을 때 사용
+  // 2. 입출력 constructor 를 만들고 싶을 때 사용
+
+
+
+
+
+  // Arrow function 장점
+
+  // 1. 입출력 constructor 를 만들 때 보기 쉬움
+
+  let func1 = (num) => { return num + 10};
+  func1(5); // 15
+
+
+  // 2. 파라미터가 1개일 때 소괄호 생략 가능
+
+  let func2 = num => { return num + 10};
+  func2(5); // 15
+
+
+  // 3. 코드가 한 줄이면 중괄호 및 return 도 생략 가능  
+
+  let func3 = num => num + 10;
+  func3(5); // 15
+
+
+
+
+
+  // Arrow function 예시
+
+  // 1. forEach 콜백함수
+
+  [1,2,3,4].forEach(function(el){
+    console.log(el);  // 1,2,3,4
+  });
+
+  [1,2,3,4].forEach( el => console.log(el) );  // 1,2,3,4
+
+
+  // 2. eventListener
+  // 일반 function eventListener 에서 this 는 e.currentTarget
+  // arrow function eventListener 에서 this 는 function 밖의 this 그대로 사용 
+
+  document.getElementById('btn').addEventListener('click', function(){
+    console.log(this);  // <button id="btn">버튼</button>
+  });
+
+  document.getElementById('btn').addEventListener('click', (e)=>{
+    console.log(this);  // window
+    console.log(e.currentTarget);  // <button id="btn">버튼</button>
+  });
+
+
+  // 3. Object 안의 함수
+
+  let obj3 = {
+    func3 : () => {
+      console.log(this);
+    }
+  }
+
+  obj3.func3();  // window
+</script>
