@@ -7,17 +7,25 @@
   <title>this</title>
 </head>
 <body>
-  <div></div>
+  <div>
+    <button id="btn">버튼</button>
+  </div>
 </body>
 </html>
 
 <script>
   // this 1. 
-  // 그냥 사용하거나 일반 함수 안에서 사용하면 window 를 의미!
+  // 그냥 사용하거나 일반 함수 안에서 this 를 사용하면 window 를 의미!
   // 사실상 전역공간에서 만들면 this 가 있는 함수를 포함하는 object 가 window 인 것이므로 2번과 동일하다고 봐도 무방
 
   // this 2. 
   // object 내 함수 안에서 this 를 사용하면, this 가 있는 함수를 포함하는 object 를 의미!
+
+  // this 3.
+  // constructor 함수 안에서 this 를 사용하면 새로 생성되는 object 를 의미!
+
+  // this 4.
+  // eventListener 안에서의 this 는 event.currentTarget 과 동일
 
 
 
@@ -90,4 +98,47 @@
 
   func6();  // this 는 기본적으로 window, strict mode 에서는 undefined.
   window.func6();  // this 는 window.
+
+
+  // ex7.
+  function constructor7(){
+    this.name7 = 'Seoyun';
+  }
+
+  let obj7 = new constructor7();
+  obj7;  // {name7: 'Seoyun'} 이라는 object 생성!
+
+
+  // ex8.
+  document.getElementById('btn').addEventListener('click', function(e){
+    console.log(this);  // e.currentTarget 과 동일하게 btn 태그를 의미.
+    console.log(e.currentTarget);  // btn 태그를 의미.
+
+    let arr8 = [1, 2, 3];
+    arr8.forEach(function(el){
+      console.log(el);  // 1, 2, 3 이 순차적으로 나옴.
+      console.log(this);  // this 1 에 해당하므로 this 는 window 를 의미.
+    })
+  })
+
+
+  // ex9.
+  let obj9 = {
+    names9 : ['Seoyun', 'Suin', 'Inwoo'],
+    func9 : function(){
+
+      console.log(this);  //  this 가 있는 익명함수를 포함하고 있는 object, 즉 여기서는 obj9 을 의미.
+
+      obj9.names9.forEach(function(el){
+        console.log(this);  // this 가 있는 익명함수는 그냥 일반함수이므로 this 는 window 를 의미.
+      })
+
+      obj9.names9.forEach((el)=>{
+        console.log(this);  // arrow function 은 this 값을 함수 바깥에서 그대로 가져오므로, 즉 여기서는 obj9 을 의미.
+      })
+
+    }
+  }
+
+  obj9.func9();
 </script>
