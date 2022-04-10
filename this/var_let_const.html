@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>var, let, const</title>
+</head>
+<body>
+  <div></div>
+</body>
+</html>
+
+<script>
+  // 'use strict';
+
+  // 1. var
+
+  // 재선언 O
+  var name1 = 'name1-1';
+  var name1 = 'name1-2';
+
+
+  // 재할당 O
+  name1 = 'name1-3';
+
+
+  // 범위: function
+  function func1(){
+    var name1 = 'name1-4'
+    console.log(name1);
+  }
+
+  if (true) {
+    var name1 = 'name1-5';
+    console.log(name1);  // name1-5
+  }
+
+  func1();  // name1-4
+  console.log(name1);  // name1-5
+
+
+
+
+
+  // 2. let
+
+  // 재선언 X
+  let age2 = 10;
+  // let age2 = 20;
+
+
+  // 재할당 O
+  age2 = 30;
+
+
+  // 범위: {}
+  function func2(){
+    let age2 = 40;
+    console.log(age2);
+  }
+  
+  if (true) {
+    let age2 = 50;
+    console.log(age2);  // 50
+  }
+
+  func2();  // 40
+  console.log(age2);  // 30
+
+
+
+
+
+  // 3. const
+
+  // 재선언 X
+  const place3 = 'place3-1';
+  // const place3 = 'place3-2';
+
+
+  // 재할당 X
+  // place3 = 'place3-3';
+
+  // const 로 object 를 만들었을 때, object 의 내부 값을 변경해도 에러가 발생하지 않는다. (const 변수 자체를 재할당한 것이 아니므로!)
+  const person1 = { name1 : 'Jihyeon'};
+  person1.name1 = 'Seoyun';  
+
+  // 수정이 불가능한 object 를 만들고 싶을 때는 .freeze() 사용하면 된다.
+  const person2 = { name2 : 'Jihyeon'};
+  Object.freeze(person2); // 이제 person2 object 를 수정하지 못하게 된다.
+  person2.name2 = 'Seoyun';
+
+
+  // 범위: {}
+  function func3(){
+    const place3 = 'place3-4';
+    console.log(place3);
+  }
+  
+  if (true) {
+    const place3 = 'place3-5';
+    console.log(place3);  // place3-5
+  }
+
+  func3();  // place3-4
+  console.log(place3);  // place3-1
+</script>
