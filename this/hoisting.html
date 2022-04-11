@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoisting</title>
+</head>
+<body>
+  <div></div>
+</body>
+</html>
+
+<script>
+  // Hoisting
+  // 맨 위에서 age1 를 선언하지는 않았지만, Hoisting 현상으로 인해 마치 맨 위에 var age1; 로 변수를 선언한 것처럼 동작!
+  // 함수 선언도 hoisting 됨.
+
+  console.log(age1);  // undefined : 변수를 선언은 했지만 할당하지 않았을 때 나오는 일종의 자료형.
+
+  var age1 = 30;
+
+  console.log(age1);  // 30
+
+
+
+
+
+  // 변수를 동시에 여러개 만들기: var, let, const 다 동시에 변수 생성 가능.
+
+  var name2, sex2, from2;
+
+  var name2 = 'Seoyun', sex2 = 'female', from2 = 'Busan';
+
+
+
+
+
+  // 전역변수: 모든 곳에서 사용할 수 있는 변수
+
+  var age3 = 30;
+
+  function showPerson(){
+    console.log(age3);
+    var name3 = 'Jihyeon';
+    console.log(name3);
+  }
+
+  showPerson();  // 30, Jihyeon
+  console.log(age3);  // 30
+  // console.log(name3);  // name3 is not defined
+
+
+
+
+
+  // window 로 전역변수 만들기: 전역변수 만드는 방법으로 권장.
+
+  window.name4 = "Seol-A"; 
+
+  console.log(name4);  //Seol-A
+  console.log(window.name4);  //Seol-A
+
+
+
+
+
+  // 연습문제
+  if (true){
+    let a = 1;
+    var b = 2;
+    if (true){
+      let b = 3;
+    }
+    console.log(b);  // 2
+  }
+</script>
