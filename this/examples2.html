@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examples2</title>
+</head>
+<body>
+  <div style="display : none">모달창0</div>
+  <div style="display : none">모달창1</div>
+  <div style="display : none">모달창2</div>
+
+  <button>버튼0</button>
+  <button>버튼1</button>
+  <button>버튼2</button>
+</body>
+</html>
+
+<script>
+  // 문제 1.
+
+  //func1();  // 에러
+  function func1() {
+    console.log(hello);
+    let hello = 'Hello!';
+  } 
+
+  // hello 라는 변수가 var 키워드로 선언이 되었다면 hoisting 후에 undefined 를 할당(이를 initialization 이라고 함)하므로 콘솔창에 undefined 를 출력한다.
+  // 하지만 hello 라는 변수가 let 키워드로 선언되는 경우에는 hoisting 은 되지만 undefined 가 할당되지는 않기 때문에 콘솔창에 에러가 발생한다.
+
+
+
+
+
+  // 문제 2.
+
+  //func2();  // 에러
+  var func2 = function() {
+    console.log(hello);
+    var hello = 'Hello!';
+  } 
+
+  // func2() 선언부분을 보면 function 키워드 대신 변수를 만드는 것처럼 함수를 선언하고 할당하고 있다.
+  // 이렇게 함수를 만들어도 hoisting 이 발생하는데, hoisting 은 변수와 선언부분만 이루어지므로, var func2; 만 hoisting 된다.
+  // 이 변수에다가 소괄호를 붙여봤자 아직은 함수가 아니기 때문에 실행이 불가하므로 함수가 아니라는 에러가 발생하는 것이다.
+
+
+
+
+
+  // 문제 3.
+
+  let c = 1;
+  var func3 = function() {
+    c = 2;
+  }
+  console.log(c);  // 1
+
+  // c 는 1 이라는 변수를 만들고, 그 다음에 함수를 만들어 c = 2 라고 값을 변경했다.
+  // 하지만 함수를 정의만하고 실행은 시키지 않았기 때문에, func3() 함수는 없는 코드나 마찬가지이므로 c 는 그냥 1 이다.
+
+
+
+
+
+  // 문제 4.
+
+  let d = 1;
+  var e = 2;
+  window.d = 3;
+  window.e = 4;
+
+  console.log(d + e);  // 1 + 4 = 5
+
+  // d 는 let 변수로 1 을 할당하고, 전역변수로 3을 할당했다.
+  // 이 경우, d 를 사용했을 때 조금 더 범위가 작고 가까운 1 을 참조해서 사용한다. *****
+  // e 는 var e = 2 와 window.e = 4 가 거의 동일하므로 4로 재할당 되었다.
+  // 따라서 1 + 4 가 되어 5 가 콘솔창에 출력된다. 
+
+
+
+
+
+  // 문제 5.
+  // console.log(i);  // 5
+  // for (var i = 0; i < 5; i++) { 
+  //   // console.log(i);
+  //   setTimeout(function() { console.log(i); }, i*1000 ); 
+  // }
+
+  // console.log(i);  // 에러
+  for (let i = 1; i < 6; i++) { 
+    // console.log(i);
+    setTimeout(function() { console.log(i); }, i*1000 ); 
+  }
+
+  // JavaScript 의 입장에서 문제의 코드를 해석해보자.
+  // JavaScript 는 반복문을 만나면 반복문 내의 코드를 반복해서 실행한다.
+  // 따라서, i 가 0 일 때부터, 5 가 되기 전까지 반복해달라고 반복문을 작성해두었으니 총 5 번 반복이 되어야 한다.
+  // 하지만 내부 코드가 n 초 후에 console.log(i) 를 실행해달라는 setTimeout() 함수이므로 반복문과 동시에 실행되는 게 아니라 나중에 실행된다.
+  // 그 결과, 반복문을 해석한 후 1초가 지나면 setTimeout() 안의 console.log(i) 가 실행되어야 하는데 이미 반복문의 실행이 끝나 전역변수 i 가 5 가 되어버렸기 때문에 콘솔창에는 5 만 5번 출력이 된다.
+  // 따라서 var 키워드 대신에 let 키워드를 사용하면 범위가 중괄호 안이므로, 1초 후에 console.log(i) 를 실행하기 위해 i 를 찾았을 때 for 반복문 안의 i 를 가져다 사용하게 된다.
+
+
+
+
+
+  // 문제 6. 
+  // var btns = document.querySelectorAll('button');
+  // var modals = document.querySelectorAll('div');
+  // for (var i = 0; i < 3; i++){
+  //   btns[i].addEventListener('click', function(){
+  //     modals[i].style.display = 'block';
+  //   });
+  // }
+
+  var btns = document.querySelectorAll('button');
+  var modals = document.querySelectorAll('div');
+  for (let i = 0; i < 3; i++){
+    btns[i].addEventListener('click', function(){
+      modals[i].style.display = 'block';
+    });
+  }
+
+  // JavaScript 의 입장에서 문제의 코드를 해석해보자.
+  // JavaScript 는 반복문을 만나면 반복문 내의 코드를 반복해서 실행한다.
+  // 따라서, i 가 0 일 때부터, 3 이 되기 전까지 반복해달라고 반복문을 작성해두었으니 총 3 번 반복이 되어야 한다.
+  // 현재 내부 코드는 addEventListener() 로 콜백함수 내의 modals[i].style.display = 'block'; 를 실행해달라는 코드이므로, 반복문과 동시에 실행되지 않고 나중에 클릭했을 때 실행된다.
+  // 그 결과, 반복문을 해석한 후, 누군가가 버튼을 클릭하면 addEventListener() 내의 modals[i].style.display = 'block'; 코드가 실행되어야 하는데 이미 반복문의 실행이 끝나 전역변수 i 가 3 이 되어버렸기 때문에 modals[i].style.display = 'block'; 의 i 에 3 을 집어넣으려다보니 에러가 발생한 것이다.
+  // 따라서 for 반복문에서 i 변수를 만들 때 var 키워드 대신에 let 키워드를 사용하면 범위가 중괄호 안이므로, modals[i].style.display = 'block'; 를 실행하기 위해 반복문이 돌고 난 이후에도 for 반복문 안에 남아있는 i 를 가져다 사용하게 된다.
+</script>
