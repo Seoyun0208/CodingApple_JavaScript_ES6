@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Apply & Call</title>
+	</head>
+	<body></body>
+</html>
+<script>
+	// apply 함수
+
+	let person = {
+		hello: function () {
+			console.log(this.name + " hello");
+		},
+		age: function (age) {
+			console.log(this.name + " " + age);
+		},
+	};
+
+	let person2 = {
+		name: "Seoyun",
+	};
+
+	person.hello(); // undefined hello
+
+	// person2 에 person.hello() 를 적용하고 싶을 때 apply(), call() 사용 가능!
+	person.hello.apply(person2); // Seoyun hello
+	person.hello.call(person2); // Seoyun hello
+
+	// person2 에 person.age() 를 적용할 때 apply(), call()의 파라미터를 넣는 방법이 다름!
+	person.age.apply(person2, [30]); // Seoyun 30
+	person.age.call(person2, 30); // Seoyun 30
+</script>
