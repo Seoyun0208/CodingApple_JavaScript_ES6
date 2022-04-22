@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Rest parameter</title>
+	</head>
+	<body></body>
+</html>
+<script>
+	// Rest parameter
+
+	// arguments 는 parameter 를 다루기 위해 나온 옛날 문법이고 이와 유사하지만 훨씬 나은 신문법인 rest parameter 등장!
+
+	// 파라미터에 굳이 rest 라고 쓰지 않고 다른 이름으로 만들어도 된다.
+	// rest parameter 를 사용하면 파라미터가 몇 개 들어올지 미리 지정을 해줄 필요가 없다.
+	// rest parameter 는 가장 마지막에 써야 에러가 발생하지 않는다.
+	// 두번 이상 사용할 수 없다.
+
+	// Spread Operator 를 파라미터에 사용하면 rest parameter 가 된다.
+	// 함수 파라미터 자리에 ... 이 붙으면 rest parameter 이고, 나머지는 spread operator 라고 생각하면 된다.
+
+	// rest parameter 는 파라미터 자리에 오는 모든 파라미터를 [] 안에 넣어준다.
+	function func(...params) {
+		console.log(params);
+	}
+
+	func(1, 2, 3, 4, 5); // [1, 2, 3, 4, 5]
+
+	// arguments 는 모든 파라미터를 [] 안에 넣어주는 반면, rest parameter 는 파라미터 자리에 오는 파라미터 중 일부를 특정하는 것이 가능하다.
+
+	function func1(a, b, ...params) {
+		console.log(params);
+	}
+
+	func1(1, 2, 3, 4, 5); // [3, 4, 5]
+
+	// rest parameter 는 모든 파라미터를 [] 안에 넣어주므로 index 를 이용하는 것도 가능하다.
+
+	function func2(a, b, ...params) {
+		console.log(params[1]);
+	}
+
+	func2(1, 2, 3, 4, 5); // 4
+
+	// 모든 파라미터들을 하나씩 콘솔창에 출력하는 것이 가능하다.
+
+	function func3(...params) {
+		for (let i = 0; i < params.length; i++) {
+			console.log(params[i]);
+		}
+	}
+
+	func3(1, 2, 3, 4, 5); // 1 2 3 4 5 가 콘솔창에 한 줄씩 출력!
+</script>
