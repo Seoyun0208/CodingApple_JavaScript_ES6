@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Arguments</title>
+	</head>
+	<body></body>
+</html>
+<script>
+	// Arguments
+
+	// 모든 파라미터를 한꺼번에 다루고 싶은 경우 arguments 를 사용한다.
+
+	function func(a, b, c) {
+		console.log(arguments);
+	}
+
+	func(1, 2, 3); // Arguments(3) [1, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+
+	// arguments 는 모든 파라미터들을 array 와 유사하게 만들어준다.
+
+	function func1(a, b, c) {
+		console.log(arguments[0], arguments[1], arguments[2]);
+	}
+
+	func1(1, 2, 3); // 1 2 3
+
+	// 입력한 파라미터를 손쉽게 콘솔창에 각각 출력해주는 것이 가능하다.
+
+	function func2(a, b, c) {
+		for (let i = 0; i < arguments.length; i++) {
+			console.log(arguments[i]);
+		}
+	}
+
+	func2(1, 2, 3); // 1 2 3 이 콘솔창에 한 줄씩 출력!
+</script>

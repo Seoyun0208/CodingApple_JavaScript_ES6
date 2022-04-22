@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Default parameter</title>
+	</head>
+	<body></body>
+</html>
+<script>
+	// 기본 함수 스타일
+
+	function add(a, b) {
+		console.log(a + b);
+	}
+
+	add(1, 2); // 3
+
+	// 파라미터가 2개여도 함수 내에서 사용한 파라미터가 a 하나라면, 실제로 함수를 사용할 때 파라미터 하나만 넣어도 에러가 발생하지 않는다.
+
+	function add1(a, b) {
+		console.log(a);
+	}
+
+	add1(1); // 1
+
+	// Default parameter
+
+	// 파라미터에 값을 입력하지 않았을 때 기본으로 사용하는 값을 default parameter 라고 하며 등호를 사용하면 된다.
+
+	function add2(a, b = 10) {
+		console.log(a + b);
+	}
+
+	add2(); // NaN
+	add2(1); // 11
+	add2(1, 2); // 3
+
+	// default parameter 에는 숫자 외에 수학 연산자도 사용이 가능하다.
+
+	function add3(a, b = 2 * 5) {
+		console.log(a + b);
+	}
+
+	add3(1); // 11
+
+	// default parameter 에는 숫자 외에 파라미터를 재활용하여 연산도 사용이 가능하다.
+
+	function add4(a, b = 5 * a) {
+		console.log(a + b);
+	}
+
+	add4(1); // 6
+
+	// default parameter 에는 함수 사용이 가능하다.
+
+	function tempfunc() {
+		return 20;
+	}
+
+	function add5(a, b = tempfunc()) {
+		console.log(a + b);
+	}
+
+	add5(1); // 21
+</script>
